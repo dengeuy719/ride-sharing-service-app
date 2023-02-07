@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['web','vcm-30761.vm.duke.edu','127.0.0.1']
 
+CSRF_TRUSTED_ORIGINS = ['http://localhost:8000', 'http://*.vcm-30761.vm.duke.edu:8000','http://*.127.0.0.1:8000', 'http://*.0.0.0.0:8000']
 
 # Application definition
 
@@ -78,10 +79,10 @@ WSGI_APPLICATION = 'rideapp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'proj1',
-        'USER': 'wenxi',
-        'PASSWORD': 'jackisme',
-        'HOST': '127.0.0.1',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'jackisme132',
+        'HOST': 'db',
         'PORT': '5432',
     }
 }
