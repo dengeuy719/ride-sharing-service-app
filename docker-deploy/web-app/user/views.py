@@ -6,7 +6,7 @@ from django.core.mail import send_mass_mail,BadHeaderError
 from django.contrib.auth.models import User, Permission 
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib import messages
-from .forms import RegisterForm, LoginForm, StartRequestForm, JoinRequestForm, EditRequestForm, DriverRideForm, UserCreationForm, UserRegisterForm
+from .forms import  StartRequestForm, JoinRequestForm, EditRequestForm, UserRegisterForm
 from django.urls import reverse
 from django import forms
 from django.db.models import F
@@ -31,33 +31,6 @@ def home(request):
     return render(request, 'user/home.html', context)
 
 
-
-
-# dengyue-version
-# def register(request):
-#     if request.method == "GET":
-#         return render(request, 'user/register.html')
-
-#     user = request.POST.get("user")
-#     password = request.POST.get("password")
-#     email = request.POST.get("email")
-#     #danger log 1: 判断为空，但其实可以在html使用requestuired字段实现
-#     # if not email or not password or not user:
-#     #     msg = "fill them"
-#     #     return render(request, 'user/register.html', {'message': msg})
-#     user_existed = User.objects.filter(username = user)
-#     if user_existed:
-#         msg = "username has been used!"
-#         return render(request, 'user/register.html', {'message': msg})
-#     email_existed = User.objects.filter(email = email)
-#     if email_existed:
-#         msg = "email has been used!"
-#         return render(request, 'user/register.html', {'message': msg})
-#     #添加到数据库
-#     user = User.objects.create_user(user, email, password)
-#     user.save()
-#     message = "Register successfully!"
-#     return render(request, 'user/home.html', {'message': message})
 
 
 
@@ -89,39 +62,6 @@ def register(request):
     return render(request, 'user/register.html', {'form':form})
 
 
-# def login(request):
-#     # login_form = forms.UserForm()
-#     # if request.session.get('is_login', None):  # 不允许重复登录
-#     #     return redirect('/index/')
-#     if request.method == 'POST':
-#         login_form = LoginForm(request.POST)
-#         message = 'please check the input information!'
-#         if login_form.is_valid():
-#             username = login_form.cleaned_data.get('username')
-#             password = login_form.cleaned_data.get('password')
-
-#             try:
-#                 user = User.objects.get(name=username)
-#             except :
-#                 message = 'user not exist!'
-#                 return render(request, 'login/login.html', locals())
-#             if user.password == password:
-#                 request.session['is_login'] = True
-#                 request.session['user_id'] = user.id
-#                 request.session['user_name'] = user.username
-                
-#                 # orders = Order.objects.all()
-#                 # 指定渲染模板并传递数据
-#                 # return render(request, 'login/mainpage.html', locals())
-#                 return redirect('user/home.html')
-#             else:
-#                 message = 'password not correct!'
-#                 return render(request, 'login/login.html', locals())
-#         else:
-#             return render(request, 'login/login.html', locals())
-
-#     # login_form = forms.UserForm()
-#     return render(request, 'login/login.html', locals())
 
 @login_required
 def start_request(request):
@@ -192,11 +132,6 @@ def join_request(request, nid, num):
     # sharer_list[request.user.get_uesrname()] = num
     ride.save()
     sharer = RideSharer.objects.create(user_sharer=request.user, passenger_num=num,joined_ride=ride)
-    # obj.save()
-    #print(Ride.objects.filter(id=nid).first().passenger_number)
-    # context = {
-    #     'num': num
-    # }
     return redirect('home')
 
 @login_required
@@ -452,9 +387,6 @@ def driver_order(req):
         'rides' : confirmed_rides,
         'completed' : completed_rides
     }
-    #examine data
-    #form = DriverRideForm(data = mathched_rides)
-    # if form.is_valid():
     return render(req, 'user/driver_order.html', context)
 
 @login_required

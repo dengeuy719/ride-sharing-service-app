@@ -1,7 +1,7 @@
 {% extends "user/driver_site2.html" %}
 
 {% block content %}
-   <h3>My Confirmed Orders</h3>
+   <h3 class="text-center">My Confirmed Orders</h3>
 
 
     <div class="container">
@@ -36,7 +36,7 @@
                 <td>
                   <a style="color:white" class="btn btn-secondary btn-xs"
                     href="{% url 'request_detail' obj.id %}">Details</a>
-                  <a style="color:white" class="btn btn-secondary btn-xs" href="{% url 'complete_order' obj.id %}">Complete</a>
+                  <a style="color:white" class="btn btn-success btn-xs" href="{% url 'complete_order' obj.id %}">Complete</a>
                   <!-- <button class="btn btn-primary" type="button">Button</button>
                   <button class="btn btn-primary" type="button">Button</button> -->
                 </td>

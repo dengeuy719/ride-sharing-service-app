@@ -2,8 +2,7 @@
 
 {% block content %}
 
-   <h1 style="text-align: center; font-weight: bold; font-size: 24px; margin-top: 20px;">My Information</h1>
-   <p style="text-align: center; margin-bottom: 20px;"><a href="{% url 'home' %}" style="text-decoration: underline;">back</a></p> 
+   <h3 style="text-align: center; font-weight: bold; font-size: 24px; margin-top: 20px;">My Information</h3>
    <form action="{% url 'user_info'  %}" method="post" style="margin: 0 auto; width: 60%;">
     {% csrf_token %}
         <h5 style="font-weight: bold; font-size: 18px; margin-top: 20px;">My Personal Information:</h5>
@@ -33,15 +32,7 @@
         </div>
         {% endif %}
         <br>
-        <input type="submit" value="Save" style="width: 100%; margin-top: 20px; padding: 10px;">
-    {% comment %}
-
-
-
-        {% endif %}
-        <br>
-        <input type="submit" value="Save">
-    {% comment %} <input type="hidden" name="next" value= "{{next}}" > {% endcomment %}
+        <input type="submit"  class="btn btn-success" value="Save" style="width: 100%; margin-top: 20px; padding: 10px;">
    {% if message %}<p><strong>{{ message }}</strong></p>{% endif %}
    </form>
 {% endblock%}

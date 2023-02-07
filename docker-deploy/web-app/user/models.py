@@ -14,12 +14,6 @@ class ThingPriority(models.IntegerChoices):
 
 
 class Driver(models.Model):
-    # vehicle_option= {
-    #     ('4','Sedan'),
-    #     ('5','SUV'),
-    #     ('6','Pickup'),
-    #     ('4','Coupe')
-    # }
     user = models.OneToOneField(User, related_name='driver2_user_set', on_delete=models.CASCADE)
     vehicle_type = models.IntegerField(verbose_name="Vehicle Type",choices=ThingPriority.choices)
     plate_num = models.CharField(max_length=256,null=True,blank=True)
@@ -33,10 +27,6 @@ class Ride(models.Model):
     passenger_number = models.IntegerField(validators=[
             MinValueValidator(1)
         ])
-    # sharer_number_list = DictionaryField(
-    #     models.CharField(max_length=100),
-    #     models.IntegerField(),
-    # )
     owner = models.ForeignKey(User, on_delete=models.CASCADE,related_name='owner_user_set',blank=True,null=True)
     driver = models.ForeignKey(User, on_delete=models.CASCADE,null=True,blank=True,related_name='driver_user_set')
     is_shared = models.BooleanField(default=False)
