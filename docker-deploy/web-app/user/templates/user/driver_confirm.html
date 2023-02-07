@@ -1,0 +1,32 @@
+{% extends "user/driver_site2.html" %}
+
+{% block content %}
+   <h1>Driver Confirm</h1>
+   <p><a href="{% url 'driver_site' %}">Back</a></p> 
+   <!-- #action这里有出错！ 直接写action = 'register'报错-->
+   <form action="{% url 'driver_confirm'  %}" method="post">
+               <tr>
+                <th>Destination</th> 
+                <th>Arrival_time</th>  
+                <th>Passenger_number</th>  
+                <th>Owner</th>  
+                <th>Vehicle_type</th>  
+                <th>Status</th><br>  
+            </tr>
+    {% csrf_token %}
+        {% for obj in rides %}
+            <tr> 
+                <th>{{obj.destination.label}}: {{obj.destination}}</th>
+                <th>{{obj.arrival_time.label}} {{obj.arrival_time}}</th>  
+                <th>{{obj.passenger_number.label}} {{obj.passenger_number}}</th>  
+                <th>{{obj.owner.label}} {{obj.owner}}</th>  
+                <th>{{obj.special_vehicle_type.label}} {{obj.special_vehicle_type}}</th>  
+                <th>{{obj.status.label}} {{obj.status}}</th> 
+                <a  type="submit" class="btn cbtn" href="{% url 'driver_confirm' obj.id %}" >Claim</a> <hr>
+            </tr>
+        {% endfor%}
+        
+    {% comment %} <input type="hidden" name="next" value= "{{next}}" > {% endcomment %}
+   {% if message %}<p><strong>{{ message }}</strong></p>{% endif %}
+   </form>
+{% endblock%}

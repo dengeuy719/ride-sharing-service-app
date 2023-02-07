@@ -1,0 +1,25 @@
+{% extends "user/home.html" %}
+{% block content %}
+   <h1>Driver Register</h1>
+   <p><a href="{% url 'home' %}">Back</a></p> 
+   <!-- #action这里有出错！ 直接写action = 'register'报错-->
+   <form action="{% url 'driver_register'  %}" method="post">
+    {% csrf_token %}
+    <label>Choose a vehicle type:</label>
+        <select name="vehicle">
+            <option value="4">Sedan - up to 4 Passengers</option>
+            <option value="5">SUV - up to 5 Passengers</option>
+            <option value="6">Pickup - up to 6 Passengers</option>
+            <option value="3">Coupe - - up to 3 Passengers</option>
+        </select>
+    <br>
+    {% comment %} <input type="text" name="vehicle" placeholder="vehicle type" required><br> {% endcomment %}
+    <label>Plate number:</label>
+    <input type="text" name="plate" required pattern="[A-Z0-9]{0,10}"><br>
+    <label>Special vehicle info:</label>
+    <input type="text" name="special_info" ><br><br>
+    <input type="submit" value="submit">
+    {% comment %} <input type="hidden" name="next" value= "{{next}}" > {% endcomment %}
+   {% if message %}<p><strong>{{ message }}</strong></p>{% endif %}
+   </form>
+{% endblock%}

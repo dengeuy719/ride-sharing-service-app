@@ -1,0 +1,8 @@
+{% extends "user/driver_site2.html" %}
+
+{% block content %}
+   {% comment %} <h1>Successfully completed the order!</h1> {% endcomment %}
+    {% comment %} <input type="hidden" name="next" value= "{{next}}" > {% endcomment %}
+   {% if message %}<p><strong>{{ message }}</strong></p>{% endif %}
+   {% comment %} </form> {% endcomment %}
+{% endblock%}

@@ -1,0 +1,57 @@
+{% extends "user/driver_site2.html" %}
+
+
+{% block content %}
+    {% if user.is_authenticated %}
+
+    <div class="container">
+      <div>
+
+      </div>
+      <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">
+          <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+        </div>
+
+        <!-- Table -->
+        <table class="table table-bordered">
+          <thead>
+            
+            <tr>
+                <th>Destination</th> 
+                <th>Arrival time</th>  
+                <th>Passenge rnumber</th>  
+                <th>Owner</th>  
+                <th>Vehicle type required</th>  
+                <th>opertaion</th><br>  
+            </tr>
+          </thead>
+          <tbody>
+            {% for obj in rides %}
+            {% if obj.status != "Completed" %}
+            <tr>
+                <!-- <th scope="row">1</th> -->
+                <td>{{obj.destination}}</td>
+                <td>{{obj.arrival_time}}</td>
+                <td> {{obj.passenger_number}}</td>
+                <td>{{obj.owner}}</td>
+                <td>{{obj.get_special_vehicle_type_display}}</td>
+                <td>
+                  <a style="color:white" class="btn btn-secondary btn-xs"
+                    href="{% url 'request_detail' obj.id %}">Details</a>
+                  <a style="color:white" class="btn btn-secondary btn-xs" href="{% url 'driver_confirm' obj.id %}">Accept Order</a>
+                  <!-- <button class="btn btn-primary" type="button">Button</button>
+                  <button class="btn btn-primary" type="button">Button</button> -->
+                </td>
+              </tr>
+            {% endif %}
+            {% endfor %}
+          </tbody>
+
+        
+        </table>
+      </div>
+    </div>
+    {% endif %}
+    {% endblock %}

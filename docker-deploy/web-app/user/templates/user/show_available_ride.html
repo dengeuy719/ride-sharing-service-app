@@ -1,0 +1,47 @@
+{% extends "user/home.html" %}
+
+
+
+{% block content %}
+<div class="container">
+    <div>
+        Available Rides
+    </div>
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">
+            <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+            <!-- My Rides -->
+        </div>
+
+        <!-- Table -->
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Ride Destination</th>
+                    <th>Arrival Time</th>
+                    <th>Current Status</th>
+                    <th>Operations</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for obj in ans %}
+                <tr>
+                    <!-- <th scope="row">1</th> -->
+                    <td>{{obj.destination}}</td>
+                    <td>{{obj.arrival_time}}</td>
+                    <td>{{obj.status}}</td>
+                    <td>
+                        <a style="color:white" class="btn btn-secondary btn-xs" href="{% url 'request_detail' obj.id %}">Details</a>
+                        <a style="color:white" class="btn btn-secondary btn-xs"
+                            href="{% url 'join_request' obj.id num %}">Join</a>
+                            
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

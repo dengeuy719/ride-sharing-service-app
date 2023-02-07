@@ -1,0 +1,47 @@
+{% extends "user/home.html" %}
+
+{% block content %}
+
+   <h1 style="text-align: center; font-weight: bold; font-size: 24px; margin-top: 20px;">My Information</h1>
+   <p style="text-align: center; margin-bottom: 20px;"><a href="{% url 'home' %}" style="text-decoration: underline;">back</a></p> 
+   <form action="{% url 'user_info'  %}" method="post" style="margin: 0 auto; width: 60%;">
+    {% csrf_token %}
+        <h5 style="font-weight: bold; font-size: 18px; margin-top: 20px;">My Personal Information:</h5>
+        <div style="margin-top: 20px;">
+            <label style="font-weight: bold;">Name:</label>
+            <input name="name" value="{{ context.username }}" required style="width: 100%; padding: 10px; margin-top: 10px;">
+        </div>
+        <div style="margin-top: 20px;">
+            <label style="font-weight: bold;">Email:</label>
+            <input type='email' name="email" value="{{ context.email }}" required style="width: 100%; padding: 10px; margin-top: 10px;">
+        </div>
+        {% if context.is_driver %}
+        <h5 style="font-weight: bold; font-size: 18px; margin-top: 20px;">My Vehicle Information:</h5>
+        <div style="margin-top: 20px;">
+            <label style="font-weight: bold;">Type:</label>
+            <select name="vehicle_type" value="{{ driver.vehicle_type }}" style="width: 100%; padding: 10px; margin-top: 10px;">
+                <option selected disabled value="context.plate_type">{{ context.plate_type }}</option>
+                <option value="4">Sedan</option>
+                <option value="5">SUV</option>
+                <option value="6">Pickup</option>
+                <option value="3">Coupe</option>
+            </select>
+        </div>
+        <div style="margin-top: 20px;">
+            <label style="font-weight: bold;">Plate:</label>
+            <input name="plate" required pattern="[A-Z0-9]{0,10}" value="{{ driver.plate_num }}" style="width: 100%; padding: 10px; margin-top: 10px;">
+        </div>
+        {% endif %}
+        <br>
+        <input type="submit" value="Save" style="width: 100%; margin-top: 20px; padding: 10px;">
+    {% comment %}
+
+
+
+        {% endif %}
+        <br>
+        <input type="submit" value="Save">
+    {% comment %} <input type="hidden" name="next" value= "{{next}}" > {% endcomment %}
+   {% if message %}<p><strong>{{ message }}</strong></p>{% endif %}
+   </form>
+{% endblock%}

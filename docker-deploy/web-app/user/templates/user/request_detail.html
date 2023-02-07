@@ -1,0 +1,35 @@
+{% extends "user/home.html" %}
+
+{% block content %}
+
+<div class="container my-5">
+  <div class="d-flex justify-content-center">
+    <div class="card" style="width: 50%">
+      <div class="card-header bg-secondary text-white text-center">
+        <h3 class="m-0">Order Detail</h3>
+      </div>
+      <div class="card-body">
+        <div class="d-flex justify-content-between mb-3">
+          <p><strong>Destination:</strong> {{ ride.destination }}</p>
+          <p><strong>Arrival Time:</strong> {{ ride.arrival_time }}</p>
+        </div>
+        <p><strong>Owner:</strong> {{ ride.owner }}</p>
+        <p><strong>Total Passenger Number:</strong> {{ ride.passenger_number }}</p>
+        {% if ride.special_vehicle_type != None %}
+          <p><strong>Special Vehicle Required:</strong> {{ ride.get_special_vehicle_type_display }}</p>
+        {% endif %}
+        <p><strong>Sharers:</strong></p>
+        <ul>
+          {% for value in ride.sharer.all %}
+            <li>{{ value }}</li>
+          {% endfor %}
+        </ul>
+        {% if ride.status == "Confirmed" %}
+          <p><strong>Driver:</strong> {{ ride.driver }}</p>
+          {% comment %} <p><strong>Driver Vehicle Type:</strong> {{ ride.driver.driver.field_of_Driver.get_vehicle_type_display }}</p> {% endcomment %}
+       {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
