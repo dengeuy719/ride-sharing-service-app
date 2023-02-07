@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-u9d^g##+8)7ir+=zd$+h@ui4w&dt_ea+71vq-5i=j@ow_*df+$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['vcm-30761.vm.duke.edu','127.0.0.1']
+ALLOWED_HOSTS = ['web','vcm-30761.vm.duke.edu','127.0.0.1']
 
 
 # Application definition
@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'user.apps.UserConfig',     # this is install app 
-    'crispy_forms',
     'django.contrib.postgres',
 ]
 
